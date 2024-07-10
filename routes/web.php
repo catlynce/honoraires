@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\FeeDownload;
+use App\Http\Controllers\FeePreview;
 use App\Livewire\Info;
 use App\Livewire\FeeAdd;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -15,6 +16,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/fee/create', FeeAdd::class)->name('fee.create');
+Route::get('/fee/{fee}/preview', FeePreview::class)->name('fee.preview');
+Route::get('/fee/{fee}/download', FeeDownload::class)->name('fee.download');
 
 Route::get('/infos', Info::class)->name('info');
 

@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Info::class);
     }
+
+    public function fee()
+    {
+        return $this->hasMany(Fee::class);
+    }
 }
