@@ -2,33 +2,33 @@
 <head>
     <title>Note d'honoraires</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-.roboto-light {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .roboto-light {
+            font-family: "Roboto", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
 
-.roboto-regular {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+        .roboto-regular {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
 
-.roboto-medium {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
+        .roboto-medium {
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+        }
 
-.roboto-bold {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-</style>
+        .roboto-bold {
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="px-8 py-4 text-lg max-sm roboto-regular">
@@ -58,14 +58,29 @@
 
         <div class="mt-8">
             <div class="underline">Mode de payement : </div>
-            <div><input type="checkbox" checked> <span class="inline pl-2">Virement sur le compte IBAN : {{ $fee->user->info->bank_iban }}</span></div>
-            <div class="pl-6">SWIFT / BIC Banque : {{ $fee->user->info->bank_swift }}</div>
+            <div>
+                <div class="flex items-center pl-2">
+                    @if ($fee->payed)
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    @else
+                        <span class="w-6"></span>
+                    @endif
+                    <span class="ml-2">Virement sur le compte IBAN : {{ $fee->user->info->bank_iban }}</span>
+                </div>
+                <div class="pl-10">SWIFT / BIC Banque : {{ $fee->user->info->bank_swift }}</div>
+            </div>
+
+            @if ($fee->payed_at)
+                <div class="flex items-center mt-8 pl-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    <span class="inline pl-2">Comptant : réglé au {{ $fee->payed_at }}</span>
+                </div>
+            @endif
         </div>
 
-        <div class="mt-4">
-            <input type="checkbox" id=""><span class="inline pl-2">Comptant : réglé au {{ $fee->paid_date }}</span>
-        </div>
-    </div>
-
-</body>
-</html>
+    </body>
+    </html>
