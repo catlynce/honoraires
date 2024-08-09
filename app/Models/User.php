@@ -43,7 +43,13 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'admin' => 'boolean',
         ];
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin == 1;
     }
 
     public function info()

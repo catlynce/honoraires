@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Models\Fee as ModelsFee;
 use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\Fee as ModelsFee;
+use Illuminate\Support\Facades\Auth;
 
 class Fee extends Component
 {
@@ -12,7 +13,12 @@ class Fee extends Component
 
     public function mount()
     {
-        $this->fees = ModelsFee::latest()->get();
+        // dump(Auth::user()->admin);
+        if ( Auth::user()->isAdmin() ){
+            $this->fees = ModelsFee::latest()->get();
+        } else {
+            $this->fees = ModelsFee::latest()->where('user_id', Auth::user()->id)->get();
+        }
     }
 
     public function payed($id)
