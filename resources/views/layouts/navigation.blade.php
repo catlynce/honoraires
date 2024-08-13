@@ -21,6 +21,11 @@
                     <x-nav-link :href="route('info')" :active="request()->routeIs('info')">
                         {{ __('My infos') }}
                     </x-nav-link>
+                    @if (auth()->user()->isAdmin())
+                        <x-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
+                            {{ __('Add user') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

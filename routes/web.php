@@ -6,6 +6,7 @@ use App\Livewire\Info;
 use App\Livewire\FeeAdd;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\UserCreate;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,11 +16,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/fee/create', FeeAdd::class)->name('fee.create');
-Route::get('/fee/{fee}/preview', FeePreview::class)->name('fee.preview');
-Route::get('/fee/{fee}/download', FeeDownload::class)->name('fee.download');
+Route::middleware('auth')->group(function(){
+    Route::get('/fee/create', FeeAdd::class)->name('fee.create');
+    Route::get('/fee/{fee}/preview', FeePreview::class)->name('fee.preview');
+    Route::get('/fee/{fee}/download', FeeDownload::class)->name('fee.download');
 
-Route::get('/infos', Info::class)->name('info');
+    Route::get('/infos', Info::class)->name('info');
+
+    Route::get('/user/create', UserCreate::class)->name('user.create');
+
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
