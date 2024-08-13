@@ -23,7 +23,7 @@ class FeeAdd extends Component
             $attrs
         );
 
-        return $this->redirect('dashboard');
+        return redirect('dashboard');
     }
 
     public function render()
