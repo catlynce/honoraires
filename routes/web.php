@@ -9,7 +9,11 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\UserCreate;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
+});
+
+Route::get('register', function() {
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
